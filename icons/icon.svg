@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- 外壳深蓝金属渐变 -->
+    <linearGradient id="metal-outer" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d4253"/>
+      <stop offset="35%" stop-color="#1b2a37"/>
+      <stop offset="70%" stop-color="#121c26"/>
+      <stop offset="100%" stop-color="#0a1017"/>
+    </linearGradient>
+
+    <!-- 边框高光倒角渐变 -->
+    <linearGradient id="bevel-highlight" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#6ba0be"/>
+      <stop offset="25%" stop-color="#3a5a70"/>
+      <stop offset="60%" stop-color="#1e2f3d"/>
+      <stop offset="100%" stop-color="#0d161f"/>
+    </linearGradient>
+
+    <!-- 烈焰熔岩金橙发光 (左下与右上) -->
+    <radialGradient id="glow-orange" cx="35%" cy="65%" r="45%">
+      <stop offset="0%" stop-color="#ff9900" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#f97316" stop-opacity="0.75"/>
+      <stop offset="70%" stop-color="#c2410c" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glow-orange-top" cx="68%" cy="32%" r="40%">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.9"/>
+      <stop offset="45%" stop-color="#ea580c" stop-opacity="0.6"/>
+      <stop offset="80%" stop-color="#7c2d12" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 赛博冰蓝发光 (垂直与右下) -->
+    <radialGradient id="glow-cyan" cx="65%" cy="65%" r="40%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.95"/>
+      <stop offset="45%" stop-color="#0284c7" stop-opacity="0.65"/>
+      <stop offset="75%" stop-color="#0369a1" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glow-cyan-top" cx="50%" cy="20%" r="35%">
+      <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#0284c7" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 机甲横梁金属渐变 -->
+    <linearGradient id="beam-metal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#55758d"/>
+      <stop offset="50%" stop-color="#334a5d"/>
+      <stop offset="100%" stop-color="#182733"/>
+    </linearGradient>
+
+    <!-- 中心能量晶核渐变 -->
+    <linearGradient id="core-crystal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="40%" stop-color="#0284c7"/>
+      <stop offset="80%" stop-color="#075985"/>
+      <stop offset="100%" stop-color="#0c2e44"/>
+    </linearGradient>
+
+    <!-- 核心外发光滤镜 -->
+    <filter id="core-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- 1. 最底层外边框投影与最外层六边形装甲 -->
+  <g id="outer-hexagon">
+    <!-- 外轮廓正六边形底盘 (Center: 256, 256, Radius: 236) -->
+    <polygon points="256,22 458,138 458,374 256,490 54,374 54,138" 
+             fill="url(#metal-outer)" 
+             stroke="#0a1219" 
+             stroke-width="12" 
+             stroke-linejoin="round"/>
+
+    <!-- 外圈金属高光棱线 (Radius: 226) -->
+    <polygon points="256,33 449,144 449,368 256,479 63,368 63,144" 
+             fill="none" 
+             stroke="url(#bevel-highlight)" 
+             stroke-width="5" 
+             stroke-linejoin="round"/>
+
+    <!-- 内凹装甲内壁 (Radius: 212) -->
+    <polygon points="256,48 438,153 438,359 256,464 74,359 74,153" 
+             fill="#080e15" 
+             stroke="#1c2f3e" 
+             stroke-width="3"/>
+  </g>
+
+  <!-- 2. 外缘排气散热通风槽刻线 (6 组斜向切角槽) -->
+  <g id="vent-slats" stroke="#486e88" stroke-width="2.5" stroke-linecap="round" opacity="0.75">
+    <!-- 左上通风线 -->
+    <line x1="88" y1="140" x2="102" y2="132"/>
+    <line x1="96" y1="154" x2="110" y2="146"/>
+    <line x1="104" y1="168" x2="118" y2="160"/>
+
+    <!-- 右上通风线 -->
+    <line x1="424" y1="140" x2="410" y2="132"/>
+    <line x1="416" y1="154" x2="402" y2="146"/>
+    <line x1="408" y1="168" x2="394" y2="160"/>
+
+    <!-- 左下通风线 -->
+    <line x1="88" y1="372" x2="102" y2="380"/>
+    <line x1="96" y1="358" x2="110" y2="366"/>
+    <line x1="104" y1="344" x2="118" y2="352"/>
+
+    <!-- 右下通风线 -->
+    <line x1="424" y1="372" x2="410" y2="380"/>
+    <line x1="416" y1="358" x2="402" y2="366"/>
+    <line x1="408" y1="344" x2="394" y2="352"/>
+  </g>
+
+  <!-- 3. 底层双色能量场发光区域 (熔岩金橙与电离冰蓝) -->
+  <g id="underglow-energy">
+    <!-- 熔岩战火金橙 (左下斜向主光弧) -->
+    <ellipse cx="170" cy="310" rx="110" ry="70" transform="rotate(-30, 170, 310)" fill="url(#glow-orange)"/>
+    <!-- 熔岩战火金橙 (右上副光) -->
+    <ellipse cx="340" cy="180" rx="90" ry="55" transform="rotate(-30, 340, 180)" fill="url(#glow-orange-top)"/>
+
+    <!-- 电离赛博冰蓝 (垂直中轴光柱) -->
+    <ellipse cx="256" cy="115" rx="50" ry="70" fill="url(#glow-cyan-top)"/>
+    <ellipse cx="256" cy="400" rx="55" ry="65" fill="url(#glow-cyan)"/>
+    <!-- 电离赛博冰蓝 (右下副光) -->
+    <ellipse cx="355" cy="335" rx="95" ry="60" transform="rotate(35, 355, 335)" fill="url(#glow-cyan)"/>
+  </g>
+
+  <!-- 4. 机甲交织穿插支撑梁骨骼 (Interlocking Structural Struts) -->
+  <g id="interlocking-struts" stroke="#0a1218" stroke-width="3" stroke-linejoin="round">
+    <!-- 斜拉横梁 A (左上到右下) -->
+    <path d="M120,135 L380,395 L405,370 L145,110 Z" fill="url(#beam-metal)"/>
+    <!-- 斜拉横梁 B (右上到左下) -->
+    <path d="M392,135 L132,395 L107,370 L367,110 Z" fill="url(#beam-metal)"/>
+    <!-- 垂直中轴机甲梁 -->
+    <path d="M242,55 L270,55 L270,165 L242,165 Z" fill="url(#beam-metal)"/>
+    <path d="M242,347 L270,347 L270,457 L242,457 Z" fill="url(#beam-metal)"/>
+    <!-- 横向固定肋条 -->
+    <path d="M78,242 L165,242 L165,270 L78,270 Z" fill="url(#beam-metal)"/>
+    <path d="M347,242 L434,242 L434,270 L347,270 Z" fill="url(#beam-metal)"/>
+  </g>
+
+  <!-- 5. 核心同心六边形多层台阶棱柱反应堆 (Stepped Hexagonal Core) -->
+  <g id="stepped-reactor-core" stroke="#060c12" stroke-width="3" stroke-linejoin="round">
+    <!-- 第 1 层外六边形台阶 (Radius: 108) -->
+    <polygon points="256,148 350,202 350,310 256,364 162,310 162,202" 
+             fill="#1e2c38" 
+             stroke="#365063" 
+             stroke-width="4"/>
+
+    <!-- 第 2 层内切六边形台阶 (Radius: 88) -->
+    <polygon points="256,168 332,212 332,300 256,344 180,300 180,212" 
+             fill="#141f28" 
+             stroke="#4d728d" 
+             stroke-width="3"/>
+
+    <!-- 第 3 层六边形台阶 (Radius: 70) -->
+    <polygon points="256,186 316,221 316,291 256,326 196,291 196,221" 
+             fill="#0e171e" 
+             stroke="#22d3ee" 
+             stroke-width="2.5"/>
+
+    <!-- 第 4 层六边形内台阶 (Radius: 52) -->
+    <polygon points="256,204 301,230 301,282 256,308 211,282 211,230" 
+             fill="#081016" 
+             stroke="#38bdf8" 
+             stroke-width="2"/>
+  </g>
+
+  <!-- 6. 反应堆最中心发光能量晶核 (Hexagonal Energy Crystal) -->
+  <g id="center-energy-crystal" filter="url(#core-glow)">
+    <!-- 晶核主体 (Radius: 36) -->
+    <polygon points="256,220 287,238 287,274 256,292 225,274 225,238" 
+             fill="url(#core-crystal)" 
+             stroke="#bae6fd" 
+             stroke-width="2"/>
+
+    <!-- 晶核高光切面折射 (顶部亮面) -->
+    <polygon points="256,220 287,238 256,256 225,238" 
+             fill="#7dd3fc" 
+             opacity="0.7"/>
+    <!-- 晶核右侧反射面 -->
+    <polygon points="287,238 287,274 256,256" 
+             fill="#0284c7" 
+             opacity="0.8"/>
+    <!-- 晶核左侧深色阴影面 -->
+    <polygon points="225,238 256,256 225,274" 
+             fill="#0369a1" 
+             opacity="0.9"/>
+    <!-- 晶核中心高光光点 -->
+    <circle cx="256" cy="256" r="5" fill="#ffffff" opacity="0.95"/>
+  </g>
+</svg>

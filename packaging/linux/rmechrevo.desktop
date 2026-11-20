@@ -1,0 +1,19 @@
+# Author: Aut520 <aut@autkc.com>
+# Repository: https://github.com/Aut520/rmechrevo
+# License: GPL-3.0
+
+[Desktop Entry]
+Name=RMechrevo
+Name[zh_CN]=RMechrevo 控制中心
+Name[en]=RMechrevo
+Comment=Native Rust Linux Hardware Control Center
+Comment[zh_CN]=基于 Rust 的 Linux 硬件控制中心
+GenericName=Hardware Control Center
+GenericName[zh_CN]=硬件控制中心
+Exec=/usr/bin/rmechrevo
+Icon=rmechrevo
+Terminal=false
+Type=Application
+Categories=Settings;HardwareSettings;Utility;System;
+Keywords=rmechrevo;uniwill;rgb;fan;performance;tuning;
+StartupNotify=true

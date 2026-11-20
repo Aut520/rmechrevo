@@ -1,0 +1,112 @@
+/*
+ * Author: Aut520 <aut@autkc.com>
+ * Repository: https://github.com/Aut520/rmechrevo
+ * License: GPL-3.0
+ */
+
+:root {
+  --glass-blur: 10px;
+  --glass-alpha: 0.34;
+  --bg-overlay-alpha: 0.16;
+  --bg-fallback: linear-gradient(135deg, #2b1b3d, #0f172a);
+  --bg-image: url("https://t.alcy.cc/moez");
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-pill: 9999px;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+  --font-wenkai: "LXGW WenKai", var(--font-sans);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --color-success: #52d1a0;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+  --color-info: #38bdf8;
+}
+
+:root[data-font="wenkai"] {
+  --font-body: var(--font-wenkai);
+  --font-weight-base: 600;
+}
+
+:root[data-font="sans"] {
+  --font-body: var(--font-sans);
+  --font-weight-base: 400;
+}
+
+:root[data-accent="sakura"] {
+  --accent: #f472b6;
+  --accent-strong: #ec4899;
+  --accent-secondary: #38bdf8;
+  --accent-soft: rgba(244, 114, 182, 0.22);
+  --accent-border: rgba(244, 114, 182, 0.48);
+  --accent-glow: rgba(244, 114, 182, 0.28);
+  --accent-gradient: linear-gradient(135deg, #f472b6, #ec4899);
+}
+
+:root[data-accent="cyan"] {
+  --accent: #38bdf8;
+  --accent-strong: #06b6d4;
+  --accent-secondary: #67e8f9;
+  --accent-soft: rgba(56, 189, 248, 0.2);
+  --accent-border: rgba(56, 189, 248, 0.48);
+  --accent-glow: rgba(56, 189, 248, 0.28);
+  --accent-gradient: linear-gradient(135deg, #38bdf8, #06b6d4);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --glass-rgb: 0, 0, 0;
+  --glass-bar-bg: rgba(0, 0, 0, 0.14);
+  --glass-sidebar-bg: rgba(0, 0, 0, 0.24);
+  --glass-card-bg: rgba(0, 0, 0, var(--glass-alpha));
+  --glass-card-hover: rgba(0, 0, 0, calc(var(--glass-alpha) + 0.08));
+  --glass-sub-bg: rgba(0, 0, 0, 0.24);
+  --glass-drawer-bg: rgba(16, 18, 24, 0.64);
+  --glass-input-bg: rgba(0, 0, 0, 0.28);
+  --glass-border: rgba(255, 255, 255, 0.11);
+  --glass-border-hover: rgba(255, 255, 255, 0.22);
+  --glass-divider: rgba(255, 255, 255, 0.09);
+  --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
+  --glass-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.24);
+  --overlay-color: rgba(0, 0, 0, var(--bg-overlay-alpha));
+
+  --text-primary: rgba(255, 255, 255, 0.96);
+  --text-secondary: rgba(255, 255, 255, 0.78);
+  --text-muted: rgba(255, 255, 255, 0.58);
+  --text-shadow: 0 1px 2px rgba(0, 0, 0, 0.36);
+
+  --pill-bg: rgba(0, 0, 0, 0.28);
+  --pill-hover: rgba(255, 255, 255, 0.12);
+  --toggle-track: rgba(255, 255, 255, 0.22);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --glass-rgb: 255, 255, 255;
+  --glass-bar-bg: rgba(255, 255, 255, 0.22);
+  --glass-sidebar-bg: rgba(255, 255, 255, 0.34);
+  --glass-card-bg: rgba(255, 255, 255, clamp(0.32, calc(var(--glass-alpha) + 0.14), 0.78));
+  --glass-card-hover: rgba(255, 255, 255, clamp(0.42, calc(var(--glass-alpha) + 0.22), 0.85));
+  --glass-sub-bg: rgba(255, 255, 255, 0.36);
+  --glass-drawer-bg: rgba(255, 255, 255, 0.68);
+  --glass-input-bg: rgba(255, 255, 255, 0.56);
+  --glass-border: rgba(255, 255, 255, 0.45);
+  --glass-border-hover: rgba(255, 255, 255, 0.72);
+  --glass-divider: rgba(15, 23, 42, 0.09);
+  --glass-shadow: 0 4px 16px rgba(15, 23, 42, 0.09);
+  --glass-shadow-hover: 0 8px 24px rgba(15, 23, 42, 0.14);
+  --overlay-color: rgba(255, 255, 255, calc(var(--bg-overlay-alpha) * 0.45));
+
+  --text-primary: rgba(15, 23, 42, 0.94);
+  --text-secondary: rgba(30, 41, 59, 0.78);
+  --text-muted: rgba(51, 65, 85, 0.62);
+  --text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
+
+  --pill-bg: rgba(255, 255, 255, 0.42);
+  --pill-hover: rgba(255, 255, 255, 0.62);
+  --toggle-track: rgba(15, 23, 42, 0.18);
+}

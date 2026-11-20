@@ -1,0 +1,20 @@
+# Author: Aut520 <aut@autkc.com>
+# Repository: https://github.com/Aut520/rmechrevo
+# License: GPL-3.0
+
+[Unit]
+Description=RMechrevo Linux Hardware Control Daemon
+Documentation=https://github.com/Aut520/rmechrevo
+After=multi-user.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/rmechrevo-daemon
+Restart=always
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

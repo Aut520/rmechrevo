@@ -1,0 +1,46 @@
+# Author: Aut520 <aut@autkc.com>
+# Repository: https://github.com/Aut520/rmechrevo
+# License: GPL-3.0
+
+pkgname=rmechrevo
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Native Rust Linux hardware control center and privileged daemon for Uniwill (INOU0000) laptops"
+arch=('x86_64')
+url="https://github.com/Aut520/rmechrevo"
+license=('GPL-3.0-only')
+depends=(
+  'glibc'
+  'gtk3'
+  'webkit2gtk-4.1'
+  'libayatana-appindicator'
+  'librsvg'
+  'systemd'
+)
+optdepends=(
+  'acpi_call-dkms: Required for EC/ACPI register read/write via /proc/acpi/call'
+  'nvidia-utils: GPU frequency offset and S4 hibernate VRAM preservation'
+)
+makedepends=('cargo' 'nodejs' 'npm' 'pkgconf')
+install=rmechrevo.install
+source=("$pkgname-$pkgver.tar.gz::https://github.com/Aut520/rmechrevo/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  (cd frontend && npm ci && npm run build)
+  cargo build --release --locked --bin rmechrevo --bin rmechrevo-daemon
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  install -Dm755 target/release/rmechrevo "$pkgdir/usr/bin/rmechrevo"
+  install -Dm755 target/release/rmechrevo-daemon "$pkgdir/usr/bin/rmechrevo-daemon"
+  install -Dm644 packaging/linux/rmechrevo-daemon.service "$pkgdir/usr/lib/systemd/system/rmechrevo-daemon.service"
+  install -Dm644 packaging/linux/rmechrevo.desktop "$pkgdir/usr/share/applications/rmechrevo.desktop"
+  install -Dm644 icons/32x32.png "$pkgdir/usr/share/icons/hicolor/32x32/apps/rmechrevo.png"
+  install -Dm644 icons/64x64.png "$pkgdir/usr/share/icons/hicolor/64x64/apps/rmechrevo.png"
+  install -Dm644 icons/128x128.png "$pkgdir/usr/share/icons/hicolor/128x128/apps/rmechrevo.png"
+  install -Dm644 icons/icon.svg "$pkgdir/usr/share/icons/hicolor/scalable/apps/rmechrevo.svg"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
