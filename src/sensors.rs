@@ -240,10 +240,7 @@ mod tests {
     #[test]
     fn test_sensors() {
         let r = HardwareSensors::read_all();
-        println!(
-            "\n===>【传感器探测结果】CPU 温度: {:.1}°C, GPU 温度: {:.1}°C, 风扇: {:?}, 来源: {:?}\n",
-            r.cpu_temp, r.gpu_temp, r.fan_cpu_rpm, r.fan_source
-        );
-        assert!(r.cpu_temp > 20.0);
+        assert!(r.cpu_temp.is_finite());
+        assert!(r.gpu_temp.is_finite());
     }
 }

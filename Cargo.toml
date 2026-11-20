@@ -6,7 +6,6 @@ authors = ["Aut520 <aut@autkc.com>"]
 description = "Native Rust Linux control center and privileged hardware daemon for Uniwill (INOU0000) laptops"
 license = "GPL-3.0-only"
 repository = "https://github.com/Aut520/rmechrevo"
-homepage = "https://github.com/Aut520/rmechrevo"
 autobins = false
 
 [lib]
