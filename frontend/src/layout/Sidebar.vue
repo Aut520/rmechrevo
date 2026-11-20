@@ -23,7 +23,7 @@ const { appearance, refreshRandomWallpaper } = useAppearance()
   <aside class="sidebar">
     <div class="sidebar-brand" data-tauri-drag-region>
       <span class="brand-badge">RMECHREVO</span>
-      <span class="brand-sub" data-tauri-drag-region>
+      <span class="brand-sub" :title="systemInfo.product_name" data-tauri-drag-region>
         {{ systemInfo.product_name || 'Linux 硬件控制中心' }}
       </span>
     </div>
@@ -52,14 +52,18 @@ const { appearance, refreshRandomWallpaper } = useAppearance()
           v-if="appearance.bgMode === 'api'"
           class="tool-btn"
           title="换一张随机壁纸"
+          aria-label="换一张随机壁纸"
           @click="refreshRandomWallpaper"
         >
-          <RefreshCw :size="14" />
-          <span>换壁纸</span>
+          <RefreshCw :size="15" />
         </button>
-        <button class="tool-btn" title="外观与壁纸设置" @click="$emit('open-settings')">
-          <Palette :size="14" />
-          <span>外观</span>
+        <button
+          class="tool-btn"
+          title="外观与壁纸设置"
+          aria-label="外观与壁纸设置"
+          @click="$emit('open-settings')"
+        >
+          <Palette :size="15" />
         </button>
       </div>
     </div>
@@ -68,13 +72,15 @@ const { appearance, refreshRandomWallpaper } = useAppearance()
 
 <style scoped>
 .sidebar {
-  width: 196px;
+  width: max-content;
+  min-width: 136px;
+  max-width: 162px;
   flex-shrink: 0;
   height: 100%;
-  padding: 18px 12px 14px;
+  padding: 16px 10px 14px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   background: var(--glass-sidebar-bg);
   backdrop-filter: blur(var(--glass-blur)) saturate(135%);
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(135%);
@@ -82,7 +88,7 @@ const { appearance, refreshRandomWallpaper } = useAppearance()
 }
 
 .sidebar-brand {
-  padding: 2px 6px 4px;
+  padding: 2px 4px 4px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -102,12 +108,12 @@ const { appearance, refreshRandomWallpaper } = useAppearance()
 }
 
 .brand-sub {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%;
+  max-width: 122px;
 }
 
 .nav-list {
@@ -118,13 +124,14 @@ const { appearance, refreshRandomWallpaper } = useAppearance()
 }
 
 .nav-item {
-  height: 40px;
-  padding: 0 12px;
+  height: 38px;
+  padding: 0 11px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   font-size: 13px;
+  white-space: nowrap;
   color: var(--text-secondary);
   border: 1px solid transparent;
 }
@@ -150,15 +157,16 @@ const { appearance, refreshRandomWallpaper } = useAppearance()
   border-top: 1px solid var(--glass-divider);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
 }
 
 .daemon-state {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 6px;
+  gap: 7px;
+  padding: 0 4px;
   font-size: 11.5px;
+  white-space: nowrap;
   color: var(--text-muted);
 }
 
@@ -166,6 +174,7 @@ const { appearance, refreshRandomWallpaper } = useAppearance()
   width: 7px;
   height: 7px;
   border-radius: 50%;
+  flex-shrink: 0;
   background: var(--color-warning);
 }
 
@@ -186,7 +195,7 @@ const { appearance, refreshRandomWallpaper } = useAppearance()
 .tool-btn {
   flex: 1;
   height: 32px;
-  padding: 0 8px;
+  padding: 0;
   border-radius: var(--radius-sm);
   background: var(--glass-sub-bg);
   border: 1px solid var(--glass-border);
@@ -194,8 +203,6 @@ const { appearance, refreshRandomWallpaper } = useAppearance()
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  font-size: 11.5px;
 }
 
 .tool-btn:hover {

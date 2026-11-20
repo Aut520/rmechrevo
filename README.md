@@ -15,6 +15,20 @@
 
 `rmechrevo`（前缀 `r` 代表 **Rust**）是一款专为 Linux 桌面打造的原生硬件控制中心与特权守护服务，面向采用 **同方 / Uniwill `INOU0000` ACPI/EC 协议** 的游戏本模具（完整开发与验证基于 **机械革命 蛟龙 16 Pro 2025**）。项目采用 **Rust + Tauri 2 + Vue 3** 双二进制特权分离架构：后台 `rmechrevo-daemon` 托管底层 EC/ACPI 通信与物理快捷键，桌面端 `rmechrevo` 以普通用户免 `sudo` 运行，完整兼容 Wayland 与 X11。
 
+<p align="center">
+  <img src="doc/images/overview.jpg" alt="RMechrevo 概览大厅" width="900" />
+</p>
+
+## 界面预览
+
+| 概览大厅 | RGB 键盘 |
+| :---: | :---: |
+| ![概览大厅](doc/images/overview.jpg) | ![RGB 键盘](doc/images/keyboard.jpg) |
+
+| 电池与显卡 | 系统与补丁 |
+| :---: | :---: |
+| ![电池与显卡](doc/images/power.jpg) | ![系统与补丁](doc/images/system.jpg) |
+
 ## 功能总览
 
 | 模块 | 能力说明 |

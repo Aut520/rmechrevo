@@ -2,6 +2,8 @@
 
 采用同方 / Uniwill `INOU0000` 模具的独显游戏本（主测机型：**机械革命 蛟龙 16 Pro 2025**，主板 `JIAOLONG Series-X6xR55xK-B2`，BIOS `N.1.19MRO20`，EC `1.31`）在 Linux 下使用独显直连（dGPU Only）或 NVIDIA 闭源驱动时，常见两类电源恢复故障：S3/S0ix 睡眠唤醒黑屏与 S4 休眠恢复黑屏。`rmechrevo` 在「系统与补丁」页内置了完整的检测、一键部署与一键回滚能力。
 
+![系统与补丁 - S3 睡眠防护与 S4 休眠防黑屏](images/system.jpg)
+
 ---
 
 ## 1. S3 / S0ix 睡眠防护（`src/acpi_patches.rs`）

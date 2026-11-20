@@ -62,6 +62,79 @@ pub struct DriverManager;
 impl DriverManager {
     const ACPI_CALL_PATH: &'static str = "/proc/acpi/call";
 
+    fn detect_cpu_model() -> Option<String> {
+        let content = fs::read_to_string("/proc/cpuinfo").ok()?;
+        for line in content.lines() {
+            if let Some(rest) = line.strip_prefix("model name") {
+                if let Some((_, val)) = rest.split_once(':') {
+                    let cleaned = val
+                        .trim()
+                        .split(" with ")
+                        .next()
+                        .unwrap_or(val.trim())
+                        .trim();
+                    if !cleaned.is_empty() {
+                        return Some(cleaned.to_string());
+                    }
+                }
+            }
+        }
+        None
+    }
+
+    fn detect_gpu_model() -> Option<String> {
+        if let Ok(out) = Command::new("nvidia-smi")
+            .args(["--query-gpu=name", "--format=csv,noheader"])
+            .output()
+        {
+            if out.status.success() {
+                if let Some(first) = String::from_utf8_lossy(&out.stdout)
+                    .lines()
+                    .map(str::trim)
+                    .find(|l| !l.is_empty())
+                {
+                    return Some(first.to_string());
+                }
+            }
+        }
+
+        let out = Command::new("lspci").output().ok()?;
+        if !out.status.success() {
+            return None;
+        }
+        let text = String::from_utf8_lossy(&out.stdout);
+        let mut fallback = None;
+        for line in text.lines() {
+            let lower = line.to_ascii_lowercase();
+            if !(lower.contains("vga compatible controller") || lower.contains("3d controller")) {
+                continue;
+            }
+            let desc = line.split_once(": ").map(|(_, v)| v.trim()).unwrap_or(line.trim());
+            let friendly = if let (Some(l), Some(r)) = (desc.rfind('['), desc.rfind(']')) {
+                if r > l + 1 {
+                    let inner = desc[l + 1..r].trim();
+                    if lower.contains("nvidia") && !inner.to_ascii_lowercase().starts_with("nvidia") {
+                        format!("NVIDIA {}", inner)
+                    } else {
+                        inner.to_string()
+                    }
+                } else {
+                    desc.to_string()
+                }
+            } else {
+                desc.to_string()
+            };
+
+            if lower.contains("nvidia") {
+                return Some(friendly);
+            }
+            if fallback.is_none() {
+                fallback = Some(friendly);
+            }
+        }
+        fallback
+    }
+
     pub fn check_status() -> DriverStatus {
         let mut status = DriverStatus::default();
 
@@ -80,10 +153,17 @@ impl DriverManager {
             } else {
                 format!("{} {}", vendor, prod)
             };
-            status.hardware_info.board_name = read_dmi("board_name", "Unknown");
-            status.hardware_info.bios_version = read_dmi("bios_version", "N.1.19MRO20");
-            status.hardware_info.bios_date = read_dmi("bios_date", "12/18/2025");
-            status.hardware_info.ec_version = read_dmi("ec_firmware_release", "1.31");
+            status.hardware_info.board_name = read_dmi("board_name", "--");
+            status.hardware_info.bios_version = read_dmi("bios_version", "--");
+            status.hardware_info.bios_date = read_dmi("bios_date", "--");
+            status.hardware_info.ec_version = read_dmi("ec_firmware_release", "--");
+        }
+
+        if let Some(cpu) = Self::detect_cpu_model() {
+            status.hardware_info.cpu_model = cpu;
+        }
+        if let Some(gpu) = Self::detect_gpu_model() {
+            status.hardware_info.gpu_model = gpu;
         }
 
         if let Ok(out) = Command::new("uname").arg("-sr").output() {
@@ -208,5 +288,17 @@ impl DriverManager {
         } else {
             Err("模块加载完毕但 /proc/acpi/call 节点未生成，请检查安全启动(Secure Boot)是否开启".into())
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::DriverManager;
+
+    #[test]
+    fn detect_cpu_and_status_safe() {
+        let status = DriverManager::check_status();
+        assert!(!status.hardware_info.cpu_model.is_empty());
+        assert_ne!(status.hardware_info.cpu_model, "--");
     }
 }

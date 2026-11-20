@@ -843,7 +843,12 @@ fn handle_client(
                     let rgb_eff = *rgb_effect_mode.lock().unwrap();
                     let bat_m = *battery_mode.lock().unwrap();
                     let tuning_val = custom_tuning.lock().unwrap().clone();
-                    let ds_val = driver_status.lock().unwrap().clone();
+                    let ds_val = {
+                        let fresh = DriverManager::check_status();
+                        let mut ds_lock = driver_status.lock().unwrap();
+                        *ds_lock = fresh.clone();
+                        fresh
+                    };
 
                     let is_custom_on = *custom_mode_enabled.lock().unwrap();
 
