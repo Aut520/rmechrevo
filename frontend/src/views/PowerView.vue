@@ -205,6 +205,16 @@ const isDirectGpu = computed(() => props.gpuMode.includes('直连') || props.gpu
   color: #fde68a;
 }
 
+:global(:root[data-theme="light"]) .bat-badge.ac {
+  background: rgba(5, 150, 105, 0.16);
+  color: #047857;
+}
+
+:global(:root[data-theme="light"]) .bat-badge.dc {
+  background: rgba(217, 119, 6, 0.16);
+  color: #b45309;
+}
+
 .bat-metrics {
   display: grid;
   grid-template-columns: 1fr 1fr;

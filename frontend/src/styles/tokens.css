@@ -109,4 +109,9 @@
   --pill-bg: rgba(255, 255, 255, 0.42);
   --pill-hover: rgba(255, 255, 255, 0.62);
   --toggle-track: rgba(15, 23, 42, 0.18);
+
+  --color-success: #059669;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-info: #0284c7;
 }
